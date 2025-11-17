@@ -1,113 +1,78 @@
-# Desafio Tetris Stack - Controle de Peças com Estruturas de Dados
 
-Bem-vindo ao desafio **"Tetris Stack"**! Neste jogo inspirado nas mecânicas clássicas de montagem de peças, o jogador deve organizar, reservar e manipular peças em tempo real. Para isso, você, como programador, será responsável por implementar as estruturas de controle que regem a lógica das peças.
+# 🔫🎒 Tetris Stack — Controle de Peças com Estruturas de Dados
 
-A empresa **ByteBros**, especializada em jogos educacionais de lógica e programação, contratou você para desenvolver o sistema de gerenciamento de peças, utilizando estruturas como **fila circular** e **pilha**.
+![C](https://img.shields.io/badge/language-C-0078d7?style=flat-square&logo=c)
+![Challenge](https://img.shields.io/badge/challenge-ByteBros-orange?style=flat-square)
+![Status](https://img.shields.io/badge/status-Em%20Progresso-yellow?style=flat-square)
 
-O desafio está dividido em três níveis: **Novato**, **Aventureiro** e **Mestre**, com cada nível adicionando mais complexidade ao anterior.  
-**Você deve escolher qual desafio deseja realizar.**
+Repositório desenvolvido como um desafio educacional para praticar estruturas de dados aplicadas a uma mecânica inspirada em Tetris. O objetivo é implementar e evoluir um sistema de controle de peças usando **fila circular** e **pilha**, com versões incrementais que aumentam a complexidade e introduzem boas práticas.
 
-🚨 **Atenção:** O nível Novato foca apenas na fila de peças, usando conceitos básicos de structs, arrays e modularização.
+**Estrutura do repositório**
 
-## 🎮 Nível Novato: Fila de Peças Futuras
+- `tetris.c`: Arquivo principal com versão base e utilitários compartilhados.
+- `tetris-novato.c`: Implementação do Nível Novato (fila circular de peças).
+- `tetris-aventureiro.c`: Implementação do Nível Aventureiro (fila + pilha de reserva).
+- `tetris-mestre.c`: Implementação do Nível Mestre (operações avançadas entre fila e pilha).
+- Executáveis pré-compilados: `tetris-novato`, `tetris-aventureiro`, `tetris-mestre` (quando presentes).
+- `README.md`: Documentação (este arquivo).
 
-No nível Novato, você criará o sistema inicial de controle das peças futuras do jogo Tetris Stack. As peças possuem um **nome** (representando o tipo, como 'I', 'O', 'T', 'L') e um **id** exclusivo (identificador numérico).
+**Objetivo do desafio**
 
-🚩 **Objetivo:** Criar um programa em C que simula uma **fila circular** de 5 peças com as seguintes funcionalidades:
+Construir um conjunto de exercícios em C que ensinem e reforcem o uso de estruturas de dados básicas (fila circular e pilha), modularização, gerenciamento de estado e entrada/saída via terminal.
 
-*   Visualizar a fila atual
-*   Jogar (remover) a peça da frente
-*   Inserir automaticamente uma nova peça no final da fila
+**Como executar**
 
-⚙️ **Funcionalidades do Sistema:**
+Compile e execute cada versão com o compilador Clang (exemplo):
 
-*   Inicializar a fila com 5 peças geradas automaticamente.
-*   Permitir que o usuário:
-    *   Jogue uma peça (dequeue)
-    *   Insira uma nova peça (enqueue)
-    *   Visualize o estado atual da fila
-*   Manter a fila circular, reaproveitando o espaço.
+```bash
+clang -g tetris-novato.c -o tetris-novato
+./tetris-novato
 
-📥 **Entrada** e 📤 **Saída de Dados:**
+clang -g tetris-aventureiro.c -o tetris-aventureiro
+./tetris-aventureiro
 
-*   O programa utiliza menus via terminal.
-*   A cada ação, o estado atualizado da fila é exibido com `printf`.
+clang -g tetris-mestre.c -o tetris-mestre
+./tetris-mestre
+```
 
-**Simplificações para o Nível Novato:**
+**Principais temas estudados neste projeto**
 
-*   Trabalhe **apenas com a fila**.
-*   A fila deve conter **exatamente 5 elementos**.
-*   Use uma função `gerarPeca()` para criar automaticamente novas peças.
-*   Utilize structs e arrays. Não implemente pilha.
+    - **Estruturas de Dados**: fila circular (queue) e pilha (stack).
+    - **Modularização em C**: uso de funções, structs e organização por arquivos.
+    - **Gerenciamento de estado**: manter a integridade da fila e da pilha entre operações.
+    - **Entrada/Saída via Terminal**: menus interativos e exibição do estado das estruturas.
 
-## 🛡️ Nível Aventureiro: Reserva de Peças com Pilha
+## 📚 Análise por Nível — O que foi aprendido e utilizado
 
-No nível Aventureiro, você irá expandir o sistema com uma **pilha de reserva de peças**, que permite ao jogador guardar peças para uso posterior.
+**Nível Novato** (`tetris-novato.c`):
 
-🆕 **Diferença em relação ao Nível Novato:**
+    - **O que faz:** Implementa uma fila circular fixa com 5 posições que representa as próximas peças do jogo. Permite visualizar a fila, jogar (remover) a peça da frente e inserir automaticamente uma nova peça ao final.
+    - **Principais construções usadas:** `struct` para representar peças, arrays estáticos para a fila, índices `head`/`tail`, geração automática de peças (`gerarPeca()`).
+    - **I/O e tratamento de strings:** Menu via `printf`/`scanf` (entrada numérica), exibição do estado da fila com `printf`.
+    - **Conceitos aprendidos:** Fila circular, gerenciamento de índices, geração automática de elementos, testes básicos via terminal.
 
-*   Introdução da **pilha linear** para reservar peças.
-*   A fila permanece sempre cheia com 5 peças.
+**Nível Aventureiro** (`tetris-aventureiro.c`):
 
-⚙️ **Funcionalidades do Sistema:**
+    - **O que faz:** Acrescenta uma pilha de reserva (capacidade 3). O jogador pode reservar a peça da frente da fila (push) e usar uma peça reservada (pop). A fila continua sempre com 5 peças, sendo reposta automaticamente.
+    - **Principais construções usadas:** Pilha linear (array + topo), chamadas para operações de pilha (`push`/`pop`), reutilização de funções da versão Novato.
+    - **I/O e UX:** Menu com opções adicionais; após cada ação, exibe-se o estado da fila e da pilha para feedback imediato.
+    - **Conceitos aprendidos:** Integração entre estruturas, limites de capacidade, tratamento de underflow/overflow da pilha e UX simples no terminal.
 
-*   Além das opções anteriores, o usuário pode:
-    *   Reservar a peça da frente da fila (push)
-    *   Usar uma peça reservada (pop)
-*   A fila continua funcionando com inserção automática.
-*   A pilha tem **capacidade máxima de 3 peças**.
+**Nível Mestre** (`tetris-mestre.c`):
 
-📥 **Entrada** e 📤 **Saída de Dados:**
+    - **O que faz:** Introduz operações avançadas como troca entre o topo da pilha e a frente da fila, desfazer a última jogada e inverter a interação entre fila e pilha. Mantém a fila circular e a pilha de reserva com todas as validações necessárias.
+    - **Principais construções usadas:** Histórico de ações para desfazer, operações de swap entre estruturas, validações robustas e modularização para separar lógica de interface.
+    - **Busca e Ordenação:** Não se aplica diretamente ao jogo, foco em manipulação segura de estado e reversibilidade das ações.
+    - **Conceitos aprendidos:** Design de operações reversíveis, manutenção da integridade de dados, limpeza e separação de responsabilidades no código.
 
-*   Menu com 4 opções:
-    * `1` - Jogar peça
-    * `2` - Reservar peça
-    * `3` - Usar peça reservada
-    * `0` - Sair
-*   O estado da fila e da pilha é exibido após cada ação.
+**Observações gerais e boas práticas aplicadas em todo o projeto**
 
-**Simplificações para o Nível Intermediário:**
+    - Uso de nomes claros para funções e variáveis, comentários pontuais quando necessário e modularização por responsabilidade.
+    - Tratamento de condições de erro (fila vazia/cheia, pilha vazia/cheia) e feedback ao usuário via terminal.
+    - Código orientado a ensino: cada versão foca em um conjunto limitado de conceitos, facilitando o aprendizado incremental.
 
-*   A pilha não permite escolha da posição.
-*   O jogador **não escolhe o tipo da peça** — todas são geradas automaticamente.
-*   Não há comparação nem troca direta entre as estruturas.
+-----
 
-## 🏆 Nível Mestre: Integração Total com Estratégia
+Feito por Wilson Oliveira 🚀
 
-No nível Mestre, você implementará uma **integração complexa** entre a fila e a pilha, simulando funcionalidades avançadas como **troca**, **desfazer** e **inversão de peças**.
-
-🆕 **Diferença em relação ao Nível Aventureiro:**
-
-*   Operações mais complexas e estratégicas entre as estruturas.
-*   Manipulação reversível do estado das peças.
-
-⚙️ **Funcionalidades do Sistema:**
-
-*   Menu com múltiplas ações:
-    * `1` - Jogar peça
-    * `2` - Reservar peça
-    * `3` - Usar peça reservada
-    * `4` - Trocar peça do topo da pilha com a da frente da fila
-    * `5` - Desfazer última jogada
-    * `6` - Inverter fila com pilha
-    * `0` - Sair
-*   Controle de fila circular e pilha de reserva com atualização a cada ação.
-
-📥 **Entrada** e 📤 **Saída de Dados:**
-
-*   Mesmo estilo dos níveis anteriores.
-*   Agora exige controle total do fluxo e da memória entre as estruturas.
-
-**Observações:**
-
-*   Cada operação deve ser segura e manter a integridade dos dados.
-*   A complexidade exige modularização clara e funções bem separadas.
-
-## 🏁 Conclusão
-
-Ao concluir qualquer um dos níveis, você terá exercitado conceitos fundamentais de estrutura de dados, como **fila circular** e **pilha**, em um contexto prático de desenvolvimento de jogos.
-
-Boa sorte e divirta-se programando!
-
-Equipe de Ensino - ByteBros
 

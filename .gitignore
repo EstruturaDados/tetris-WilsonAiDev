@@ -1,0 +1,6 @@
+.vscode
+.DS_Store
+*.dSYM
+tetris-mestre
+tetris-aventureiro
+tetris-novato
